@@ -1,0 +1,36 @@
+
+#ifndef _LCD_H_
+#define _LCD_H_
+
+#include "stm32f10x.h"
+#include <stdint.h>
+
+
+#define WIDTH   84
+#define HEIGHT  48
+#define LCD_SIZE 504 //(84*48)/8
+
+#define func_set              (0x20)
+#define vertical_addr         (0x02)
+
+#define SPACE             LCD_data(0x00)
+#define NRES              GPIOA->ODR |=  ((((uint16_t)  0x1)  << 8))
+#define RES               GPIOA->ODR &=  (~(((uint16_t) 0x1)  << 8))
+#define SET_DC            GPIOA->ODR |=  ((((uint16_t)  0x1)  << 9))
+#define RESET_DC          GPIOA->ODR &=  (~(((uint16_t) 0x1)  << 9))
+
+
+
+
+void LCD_init(void);
+
+
+void LCD_pxOn(uint8_t x , uint8_t y);
+void LCD_pxOff(uint8_t x , uint8_t y);
+uint8_t** LCD_getBuffer(void);
+void LCD_resetLCD();
+void LCD_Update_Task(void); //task
+/*------------------------------- New Functions -------------------------------*/
+
+
+#endif
